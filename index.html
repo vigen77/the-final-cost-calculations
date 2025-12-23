@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Event Cost Split – Detailed Calculations</title>
+
+  <style>
+    :root { --fg:#111; --muted:#555; --bg:#fff; --line:#e6e6e6; --chip:#f6f6f6; --soft:#fbfbfb; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.55 -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    .wrap { max-width: 980px; margin: 26px auto; padding: 0 16px 44px; }
+    h1 { font-size: 22px; margin: 0 0 6px; }
+    h2 { font-size: 16px; margin: 0 0 10px; }
+    h3 { font-size: 14px; margin: 14px 0 6px; }
+    .sub { color: var(--muted); margin: 0 0 16px; }
+    .card { border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin: 12px 0; background: #fff; }
+    .chips { display:flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .chip { background: var(--chip); border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; font-size: 13px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .muted { color: var(--muted); font-size: 13px; }
+    .box { background: var(--soft); border: 1px dashed var(--line); border-radius: 10px; padding: 10px 12px; margin-top: 10px; }
+    ul { margin: 8px 0 0; padding-left: 18px; }
+    li { margin: 4px 0; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); }
+    th { background: #fafafa; font-weight: 700; }
+    .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .ok { font-weight: 800; }
+    .payline { display:flex; justify-content: space-between; padding:10px; border:1px solid var(--line); border-radius:10px; margin-top:6px; }
+    .right { text-align:right; }
+
+    .print-btn {
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:10px;
+      padding:8px 12px;
+      font-size:14px;
+      cursor:pointer;
+    }
+    @media print { .print-btn { display:none; } }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <div>
+      <h1>Event Cost Split – Detailed Calculations</h1>
+      <p class="sub">Hosts: V1, V2, V3, V4, M</p>
+    </div>
+    <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+  </div>
+
+  <!-- 1. TOTAL COSTS -->
+  <div class="card">
+    <h2>1) Total Event Costs</h2>
+    <div class="chips">
+      <span class="chip">Restaurant: <span class="mono">$2,988.40</span></span>
+      <span class="chip">Flowers: <span class="mono">$300.00</span></span>
+      <span class="chip">Gift to Priest: <span class="mono">$300.00</span></span>
+      <span class="chip">Pastry: <span class="mono">$100.00</span></span>
+      <span class="chip ok">Grand Total: <span class="mono">$3,688.40</span></span>
+    </div>
+  </div>
+
+  <!-- 2. RESTAURANT HEADCOUNT -->
+  <div class="card">
+    <h2>2) Restaurant Attendance</h2>
+    <ul>
+      <li>Total attendees: 42</li>
+      <li>General guests (shared): 23</li>
+      <li>Hosts’ parties (paid by hosts): 19</li>
+    </ul>
+
+    <div class="box">
+      <strong>Hosts’ party sizes</strong>
+      <ul>
+        <li>V1: 1</li>
+        <li>V2: 4 family + 1 special guest = 5</li>
+        <li>V3: 4 family + 4 special guests = 8</li>
+        <li>V4: 4</li>
+        <li>M: 1</li>
+      </ul>
+      <p class="muted">Special guests are treated as part of the host’s party.</p>
+    </div>
+  </div>
+
+  <!-- 3. RESTAURANT CALCULATION -->
+  <div class="card">
+    <h2>3) Restaurant Calculations</h2>
+
+    <p class="muted">
+      Per-person restaurant cost =
+      <span class="mono">$2,988.40 ÷ 42 = $71.15238…</span>
+    </p>
+
+    <h3>Host-party restaurant cost</h3>
+    <table>
+      <thead>
+        <tr><th>Host</th><th>People</th><th class="num">Restaurant Cost</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>V1</td><td>1</td><td class="num">$71.15</td></tr>
+        <tr><td>V2</td><td>5</td><td class="num">$355.76</td></tr>
+        <tr><td>V3</td><td>8</td><td class="num">$569.22</td></tr>
+        <tr><td>V4</td><td>4</td><td class="num">$284.61</td></tr>
+        <tr><td>M</td><td>1</td><td class="num">$71.15</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p class="muted">
+        General guest restaurant total =
+        <span class="mono">23 × $71.15238… ≈ $1,636.50</span><br/>
+        Equal share per host =
+        <span class="mono">$1,636.50 ÷ 5 = $327.30</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- 4. SHARED COSTS -->
+  <div class="card">
+    <h2>4) Shared Non-Restaurant Costs</h2>
+    <p class="muted">
+      Flowers + Priest + Pastry =
+      <span class="mono">$700.00</span><br/>
+      Equal share per host =
+      <span class="mono">$700 ÷ 5 = $140.00</span>
+    </p>
+  </div>
+
+  <!-- 5. FINAL ALLOCATED TOTALS -->
+  <div class="card">
+    <h2>5) Final Allocated Totals (No Waivers)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Host</th>
+          <th class="num">Party Restaurant</th>
+          <th class="num">Guest Share</th>
+          <th class="num">Shared Costs</th>
+          <th class="num ok">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>V1</td><td class="num">$71.15</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num ok">$538.45</td></tr>
+        <tr><td>V2</td><td class="num">$355.76</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num ok">$823.06</td></tr>
+        <tr><td>V3</td><td class="num">$569.22</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num ok">$1,036.52</td></tr>
+        <tr><td>V4</td><td class="num">$284.61</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num ok">$751.91</td></tr>
+        <tr><td>M</td><td class="num">$71.15</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num ok">$538.45</td></tr>
+        <tr><td class="ok">Total</td><td colspan="4" class="num ok">$3,688.40</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="muted">
+    This version reflects a standard equal-sharing model with no waivers or internal reallocations.
+  </p>
+
+</div>
+</body>
+</html>
