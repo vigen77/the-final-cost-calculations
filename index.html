@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Event Cost Split – Detailed Calculations</title>
+  <title>Event Cost Split – Detailed Calculations (Neutral)</title>
 
   <style>
     :root { --fg:#111; --muted:#555; --bg:#fff; --line:#e6e6e6; --chip:#f6f6f6; --soft:#fbfbfb; }
@@ -22,13 +22,11 @@
     ul { margin: 8px 0 0; padding-left: 18px; }
     li { margin: 4px 0; }
     table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-    th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); }
+    th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
     th { background: #fafafa; font-weight: 700; }
     .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
     .ok { font-weight: 800; }
-    .payline { display:flex; justify-content: space-between; padding:10px; border:1px solid var(--line); border-radius:10px; margin-top:6px; }
-    .right { text-align:right; }
-
+    .payline { display:flex; justify-content: space-between; padding:10px; border:1px solid var(--line); border-radius:10px; margin-top:8px; background:#fff; }
     .print-btn {
       border:1px solid var(--line);
       background:#fff;
@@ -44,15 +42,15 @@
 <body>
 <div class="wrap">
 
-  <div style="display:flex; justify-content:space-between; align-items:center;">
+  <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
     <div>
-      <h1>Event Cost Split – Detailed Calculations</h1>
+      <h1>Event Cost Split – Detailed Calculations (Neutral)</h1>
       <p class="sub">Hosts: V1, V2, V3, V4, M</p>
     </div>
     <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
   </div>
 
-  <!-- 1. TOTAL COSTS -->
+  <!-- 1) TOTAL COSTS -->
   <div class="card">
     <h2>1) Total Event Costs</h2>
     <div class="chips">
@@ -64,7 +62,7 @@
     </div>
   </div>
 
-  <!-- 2. RESTAURANT HEADCOUNT -->
+  <!-- 2) RESTAURANT ATTENDANCE -->
   <div class="card">
     <h2>2) Restaurant Attendance</h2>
     <ul>
@@ -86,7 +84,7 @@
     </div>
   </div>
 
-  <!-- 3. RESTAURANT CALCULATION -->
+  <!-- 3) RESTAURANT CALCULATIONS -->
   <div class="card">
     <h2>3) Restaurant Calculations</h2>
 
@@ -95,7 +93,7 @@
       <span class="mono">$2,988.40 ÷ 42 = $71.15238…</span>
     </p>
 
-    <h3>Host-party restaurant cost</h3>
+    <h3>3A) Host-party restaurant cost</h3>
     <table>
       <thead>
         <tr><th>Host</th><th>People</th><th class="num">Restaurant Cost</th></tr>
@@ -110,29 +108,33 @@
     </table>
 
     <div class="box">
-      <p class="muted">
+      <p class="muted" style="margin:0;">
         General guest restaurant total =
         <span class="mono">23 × $71.15238… ≈ $1,636.50</span><br/>
-        Equal share per host =
+        Equal guest share per host =
         <span class="mono">$1,636.50 ÷ 5 = $327.30</span>
       </p>
     </div>
   </div>
 
-  <!-- 4. SHARED COSTS -->
+  <!-- 4) SHARED COSTS -->
   <div class="card">
     <h2>4) Shared Non-Restaurant Costs</h2>
     <p class="muted">
-      Flowers + Priest + Pastry =
-      <span class="mono">$700.00</span><br/>
+      Flowers + Priest gift + Pastry =
+      <span class="mono">$300 + $300 + $100 = $700.00</span><br/>
       Equal share per host =
       <span class="mono">$700 ÷ 5 = $140.00</span>
     </p>
   </div>
 
-  <!-- 5. FINAL ALLOCATED TOTALS -->
+  <!-- 5) FINAL ALLOCATIONS (NO WAIVERS) -->
   <div class="card">
-    <h2>5) Final Allocated Totals (No Waivers)</h2>
+    <h2>5) Final Allocated Totals (Standard equal-sharing; no waivers)</h2>
+    <p class="muted">
+      Allocated total per host = (party restaurant) + (guest share) + (shared costs).
+      A $0.01 rounding penny is assigned to V1 so the grand total matches exactly.
+    </p>
 
     <table>
       <thead>
@@ -141,22 +143,88 @@
           <th class="num">Party Restaurant</th>
           <th class="num">Guest Share</th>
           <th class="num">Shared Costs</th>
-          <th class="num ok">Total</th>
+          <th class="num">Rounding</th>
+          <th class="num ok">Allocated Total</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>V1</td><td class="num">$71.15</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num ok">$538.45</td></tr>
-        <tr><td>V2</td><td class="num">$355.76</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num ok">$823.06</td></tr>
-        <tr><td>V3</td><td class="num">$569.22</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num ok">$1,036.52</td></tr>
-        <tr><td>V4</td><td class="num">$284.61</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num ok">$751.91</td></tr>
-        <tr><td>M</td><td class="num">$71.15</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num ok">$538.45</td></tr>
-        <tr><td class="ok">Total</td><td colspan="4" class="num ok">$3,688.40</td></tr>
+        <tr><td>V1</td><td class="num">$71.15</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num">$0.01</td><td class="num ok">$538.46</td></tr>
+        <tr><td>V2</td><td class="num">$355.76</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num">$0.00</td><td class="num ok">$823.06</td></tr>
+        <tr><td>V3</td><td class="num">$569.22</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num">$0.00</td><td class="num ok">$1,036.52</td></tr>
+        <tr><td>V4</td><td class="num">$284.61</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num">$0.00</td><td class="num ok">$751.91</td></tr>
+        <tr><td>M</td><td class="num">$71.15</td><td class="num">$327.30</td><td class="num">$140.00</td><td class="num">$0.00</td><td class="num ok">$538.45</td></tr>
+        <tr><td class="ok">Total</td><td colspan="5" class="num ok">$3,688.40</td></tr>
       </tbody>
     </table>
   </div>
 
+  <!-- 6) PAYMENTS ALREADY MADE -->
+  <div class="card">
+    <h2>6) Payments Already Made</h2>
+
+    <h3>6A) Paid directly to vendors (actual bills)</h3>
+    <table>
+      <thead>
+        <tr><th>Who paid</th><th>What was paid</th><th class="num">Amount</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>V1</td><td>Restaurant + Pastry</td><td class="num">$3,088.40</td></tr>
+        <tr><td>V3</td><td>Flowers + Gift to Priest</td><td class="num">$600.00</td></tr>
+        <tr><td class="ok">Total paid to vendors</td><td></td><td class="num ok">$3,688.40</td></tr>
+      </tbody>
+    </table>
+
+    <h3>6B) Internal payments already made (between hosts)</h3>
+    <table>
+      <thead>
+        <tr><th>From</th><th>To</th><th>Method</th><th class="num">Amount</th><th>Note</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>V4</td><td>V1</td><td>Cash</td><td class="num">$500.00</td><td>Paid before final allocation</td></tr>
+        <tr><td>M</td><td>V1</td><td>Advance</td><td class="num">$1,000.00</td><td>Paid before final allocation</td></tr>
+        <tr><td>V3</td><td>V1</td><td>Zelle</td><td class="num">$570.00</td><td>Paid before final allocation</td></tr>
+        <tr><td class="ok">Total internal payments to V1</td><td></td><td></td><td class="num ok">$2,070.00</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 7) FINAL SETTLEMENT -->
+  <div class="card">
+    <h2>7) Final Settlement (Who pays whom now)</h2>
+
+    <div class="box">
+      <strong>Balances after credits</strong>
+      <ul>
+        <li><span class="ok">V2</span> owes V1: <span class="mono">$823.06</span></li>
+        <li><span class="ok">V4</span> owes V1: <span class="mono">$751.91 − $500.00 = $251.91</span></li>
+        <li><span class="ok">V3</span> paid vendors <span class="mono">$600.00</span> and also paid V1 <span class="mono">$570.00</span>. Under this model, V3’s allocated total is <span class="mono">$1,036.52</span>, so V3 overpaid by <span class="mono">$600.00 + $570.00 − $1,036.52 = $133.48</span>.</li>
+        <li><span class="ok">M</span> allocated total is <span class="mono">$538.45</span>, but M paid V1 <span class="mono">$1,000.00</span>, so M overpaid by <span class="mono">$1,000.00 − $538.45 = $461.55</span>.</li>
+      </ul>
+      <p class="muted" style="margin-top:8px;">
+        Because of the overpayments above, V1 must issue refunds to V3 and M as shown below.
+      </p>
+    </div>
+
+    <h3>Transfers to complete settlement</h3>
+    <div class="payline"><div><span class="ok">V2 → V1</span></div><div class="num ok">$823.06</div></div>
+    <div class="payline"><div><span class="ok">V4 → V1</span></div><div class="num ok">$251.91</div></div>
+    <div class="payline" style="background: var(--soft);">
+      <div><span class="ok">V1 → V3</span> <span class="muted">(refund)</span></div><div class="num ok">$133.48</div>
+    </div>
+    <div class="payline" style="background: var(--soft);">
+      <div><span class="ok">V1 → M</span> <span class="muted">(refund)</span></div><div class="num ok">$461.55</div>
+    </div>
+
+    <p class="note">
+      Net check: incoming to V1 now = <span class="mono">$823.06 + $251.91 = $1,074.97</span>;
+      refunds by V1 = <span class="mono">$133.48 + $461.55 = $595.03</span>;
+      net to V1 now = <span class="mono">$1,074.97 − $595.03 = $479.94</span>.
+    </p>
+  </div>
+
   <p class="muted">
-    This version reflects a standard equal-sharing model with no waivers or internal reallocations.
+    This page reflects a standard equal-sharing model with no waivers or reallocations.
+    If any inputs change (costs, headcounts, or additional payments), update this page accordingly.
   </p>
 
 </div>
